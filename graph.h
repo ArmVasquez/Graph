@@ -21,7 +21,6 @@ public:
     bool saveToFile(std::string filename);
 
 private:
-    unsigned int vertexCount;
 
     class Edge {
     public:
@@ -40,4 +39,7 @@ private:
         // A linked list to store edges
         LinkedList<Edge> edges;
     };
+
+    unsigned int vertexCount;
+    Vertex *vertices;
 };

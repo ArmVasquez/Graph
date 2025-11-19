@@ -4,7 +4,8 @@ using namespace std;
 
 Graph::Graph() {
     // Constructor
-
+	vertices = nullptr;
+	vertexCount = 0;
 }
 
 Graph::~Graph() {
@@ -14,11 +15,9 @@ Graph::~Graph() {
 
 bool Graph::createGraph(unsigned int vertexCount) {
     //deleteGraph();
-    
-    Vertex *newVertices = nullptr;
 
-    newVertices = new(std::nothrow) Vertex[vertexCount];
-    if (!newVertices) {
+    vertices = new(std::nothrow) Vertex[vertexCount];
+    if (!vertices) {
         return false;
     }
 
