@@ -67,27 +67,14 @@ bool Graph::insertEdge(unsigned int fromVertex, unsigned int toVertex) {
 void Graph::printGraph() {
     cout << "Graph" << endl;
     
-
-    // Corregir esta parte
-    // Iterate through all vertices
     for (unsigned int i = 0; i < vertexCount; i++) {
-        cout << vertices[i].id << " -> ";
-        
-        // Check if vertex has edges
-        if (vertices[i].edges.begin() == vertices[i].edges.end()) {
-            cout << "[]" << endl;
-        } else {
-            // Use LinkedList iterator to iterate through edges
-            bool first = true;
-            for (auto edgeIt = vertices[i].edges.begin(); edgeIt != vertices[i].edges.end(); edgeIt++) {
-                if (!first) {
-                    cout << ", ";
-                }
-                cout << *edgeIt;  // Uses Edge's operator<<
-                first = false;
-            }
-            cout << endl;
+        cout << "[" << vertices[i].id << "]" << " -> ";
+
+        for (auto itEdges = vertices[i].edges.begin(); itEdges != vertices[i].edges.end(); itEdges++) {
+            cout << *itEdges << " ";
         }
+
+        cout << endl;
     }
 }
 

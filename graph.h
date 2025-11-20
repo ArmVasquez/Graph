@@ -39,7 +39,7 @@ private:
     class Vertex {
     public:
         // A linked list to store edges
-        unsigned int id;
+       unsigned int id;
         LinkedList<Edge> edges;
     };
 
