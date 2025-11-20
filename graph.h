@@ -1,4 +1,5 @@
 #pragma once
+
 #include "LinkedList.h"
 
 // Definition of the Graph class
@@ -9,7 +10,7 @@ public:
 
     // Methods
     bool createGraph(unsigned int vertexCount);
-    bool insertEdge(int fromVertex, int toVertex);
+    bool insertEdge(unsigned int fromVertex, unsigned int toVertex);
     bool deleteEdge(int fromVertex, int toVertex);
     void deleteGraph();
     void printGraph();
@@ -25,18 +26,20 @@ private:
     class Edge {
     public:
         // Constructor
-        Edge(unsigned int value);
+        Edge(unsigned int toVertex);
 
         // The destination vertex of the edge
-        unsigned int destination;
+        unsigned int target;
 
-        friend std::ostream& operator<<(std::ostream &os, const Edge &a);
+        friend std::ostream& operator<<(std::ostream &os, const Edge &a) {
+            return os << a.target;
+        }
     };
 
     class Vertex {
     public:
-        unsigned int id;
         // A linked list to store edges
+        unsigned int id;
         LinkedList<Edge> edges;
     };
 
