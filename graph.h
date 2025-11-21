@@ -41,13 +41,16 @@ private:
 
     class Vertex {
     public:
+        unsigned int id;
+        bool visited;
+
         // A linked list to store edges
-       unsigned int id;
         LinkedList<Edge> edges;
     };
 
     unsigned int vertexCount;
     Vertex *vertices;
 
+    void clearVisited();
     bool isValidNumeric(const std::string& str);
 };

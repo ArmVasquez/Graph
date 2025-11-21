@@ -3,6 +3,7 @@
 #include <string>
 #include <cctype>
 #include "graph.h"
+#include "Stack.h"
 
 using namespace std;
 
@@ -51,7 +52,7 @@ bool Graph::insertEdge(unsigned int fromVertex, unsigned int toVertex) {
 
     // Check if edge already exists
     for (auto it = vertices[fromVertex].edges.begin(); it != vertices[fromVertex].edges.end(); it++) {
-        if ((*it).target == toVertex) {
+        if (it->target == toVertex) {
             return false; 
         }
     }
@@ -124,6 +125,51 @@ void Graph::printGraph() {
         cout << endl;
     }
 }
+
+bool Graph::dfsIterative(unsigned int vertex) {
+    // Validating starting vertex
+    if (vertex > vertexCount - 1) {
+        return false;
+    }
+
+    //Resetting visited attributes
+    clearVisited();
+
+    //Creating stack
+    Stack<unsigned int> stack;
+    stack.push(vertex);
+
+    cout << "DFS (" << vertex << "): ";
+
+    while (!stack.isEmpty()) {
+        unsigned int currentVertex = *stack.getTop();
+        stack.pop();
+
+        if (!vertices[currentVertex].visited) {
+            vertices[currentVertex].visited = true;
+            std::cout << currentVertex << " ";
+
+            LinkedList<Edge>::Iterator it = vertices[currentVertex].edges.begin();
+            while (it != vertices[currentVertex].edges.end()) {
+                if (!vertices[it->target].visited) {
+                    stack.push(it->target);
+                }
+                ++it;
+            }
+        }
+    }
+
+    cout << "\n";
+
+    return true;
+}
+
+void Graph::clearVisited() {
+    for (unsigned int i = 0; i < vertexCount; ++i) {
+        vertices[i].visited = false;
+    }
+}
+
 
 bool Graph::isValidNumeric(const std::string& str) {
     // Check if string is empty

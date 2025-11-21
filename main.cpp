@@ -26,5 +26,6 @@ int main(int argc, char* argv[]) {
     miGrafo.insertEdge(2, 1);
 
     miGrafo.printGraph();
+    miGrafo.dfsIterative(0);
     return 0;
 }
