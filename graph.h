@@ -15,6 +15,9 @@ public:
     void deleteGraph();
     void printGraph();
 
+    // Algorithms
+    bool dfsIterative(unsigned int vertex);
+
     bool loadFromFile(std::string filename);
     //saveToFile(nombre)
     bool saveToFile(std::string filename);
