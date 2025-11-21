@@ -1,5 +1,7 @@
 #include <iostream>
 #include <new>
+#include <string>
+#include <cctype>
 #include "graph.h"
 
 using namespace std;
@@ -38,7 +40,6 @@ bool Graph::createGraph(unsigned int vertexCount) {
 bool Graph::insertEdge(unsigned int fromVertex, unsigned int toVertex) {
 
     //Validating origin vertex
-
     if (fromVertex > vertexCount - 1) {
         return false;
     }
@@ -61,6 +62,50 @@ bool Graph::insertEdge(unsigned int fromVertex, unsigned int toVertex) {
         return false;
     }
     
+    return true;
+}
+
+/*bool Graph::deleteEdge(unsigned int fromVertex, unsigned int toVertex) {
+    //Validating origin vertex
+    if (fromVertex > vertexCount - 1) {
+        return false;
+    }
+
+    //Validating destination vertex
+    if (toVertex > vertexCount - 1) {
+        return false;
+    }
+
+    // Check if the edge list is empty
+    if (vertices[fromVertex].edges.begin() == vertices[fromVertex].edges.end()) {
+        return false;
+    }
+
+    // Find position of the edge to delete
+ 
+    
+    // Delete the edge at the found position
+    if (!vertices[fromVertex].edges.deleteElement(position)) {
+        return false;
+    }
+    
+    return true;
+}*/
+
+bool Graph::isValidNumeric(const std::string& str) {
+    // Check if string is empty
+    if (str.empty()) {
+        return false;
+    }
+    
+    // Check each character is a digit
+    for (char c : str) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    
+    // String contains only digits, so it's a valid numeric string
     return true;
 }
 

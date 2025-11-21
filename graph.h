@@ -11,12 +11,10 @@ public:
     // Methods
     bool createGraph(unsigned int vertexCount);
     bool insertEdge(unsigned int fromVertex, unsigned int toVertex);
-    bool deleteEdge(int fromVertex, int toVertex);
+    //bool deleteEdge(unsigned int fromVertex, unsigned int toVertex);
     void deleteGraph();
     void printGraph();
 
-    // Revisar como cargar archivo
-    //loadFromFile(nombre)
     bool loadFromFile(std::string filename);
     //saveToFile(nombre)
     bool saveToFile(std::string filename);
@@ -30,6 +28,8 @@ private:
 
         // The destination vertex of the edge
         unsigned int target;
+
+        //Edge weight missing
 
         friend std::ostream& operator<<(std::ostream &os, const Edge &a) {
             return os << a.target;
@@ -45,4 +45,6 @@ private:
 
     unsigned int vertexCount;
     Vertex *vertices;
+
+    bool isValidNumeric(const std::string& str);
 };
