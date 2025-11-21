@@ -19,13 +19,19 @@ int main(int argc, char* argv[]) {
 
     std::cout << "Grafos" << std::endl;
 
-    miGrafo.createGraph(3);
-    miGrafo.insertEdge(1, 2);
+    miGrafo.createGraph(5);
     miGrafo.insertEdge(0, 1);
     miGrafo.insertEdge(0, 2);
-    miGrafo.insertEdge(2, 1);
+    miGrafo.insertEdge(1, 0);
+    miGrafo.insertEdge(1, 2);
+    miGrafo.insertEdge(1, 3);
+    miGrafo.insertEdge(3, 4);
+    miGrafo.insertEdge(4, 2);
 
     miGrafo.printGraph();
     miGrafo.dfsIterative(0);
+    miGrafo.bfsPath(0, 4);
+    miGrafo.bfsPath(0, 0);
+
     return 0;
 }

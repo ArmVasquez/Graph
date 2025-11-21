@@ -18,9 +18,9 @@ public:
     // Algorithms
     bool dfsIterative(unsigned int vertex);
     bool bfs(unsigned int vertex);
+    bool bfsPath(unsigned int fromVertex, unsigned int toVertex);
 
     bool loadFromFile(std::string filename);
-    //saveToFile(nombre)
     bool saveToFile(std::string filename);
 
 private:
@@ -44,6 +44,7 @@ private:
     public:
         unsigned int id;
         bool visited;
+        unsigned int previous;
 
         // A linked list to store edges
         LinkedList<Edge> edges;
@@ -53,5 +54,7 @@ private:
     Vertex *vertices;
 
     void clearVisited();
+    void clearPrevious();
+
     bool isValidNumeric(const std::string& str);
 };

@@ -1,9 +1,11 @@
 #include <iostream>
 #include <new>
+#include <climits>
 //#include <string>
 //#include <cctype>
 #include "graph.h"
 #include "Stack.h"
+#include "Queue.h"
 
 using namespace std;
 
@@ -128,7 +130,7 @@ void Graph::printGraph() {
 
 bool Graph::dfsIterative(unsigned int vertex) {
     // Validating starting vertex
-    if (vertex > vertexCount - 1) {
+    if (vertex > vertexCount - 1 || !vertexCount) {
         return false;
     }
 
@@ -164,9 +166,119 @@ bool Graph::dfsIterative(unsigned int vertex) {
     return true;
 }
 
+bool Graph::bfs(unsigned int vertex) {
+    // Validating starting vertex
+    if (vertex > vertexCount - 1 || !vertexCount) {
+        return false;
+    }
+
+    clearVisited();
+
+    //Creating queue
+    Queue<unsigned int> queue;
+
+    cout << "BFS (" << vertex << "): ";
+
+    //Start search
+    if (!queue.enqueue(vertex)) {
+        return false;
+    }
+    
+    vertices[vertex].visited = true;
+
+    while (!queue.isEmpty()) {
+        unsigned int frontVertex = *queue.getFront();
+
+        cout << frontVertex << " ";
+        queue.dequeue();
+
+        for (auto &edge : vertices[frontVertex].edges) {
+            if (!vertices[edge.target].visited) {
+                if (!queue.enqueue(edge.target)) {
+                    return false;
+                }
+
+                vertices[edge.target].visited = true;
+            }
+        }
+    }
+
+    cout << "\n";
+    return true;
+}
+
+bool Graph::bfsPath(unsigned int fromVertex, unsigned int toVertex) {
+    // Validating starting vertex
+    if (fromVertex > vertexCount - 1 || toVertex > vertexCount - 1 || !vertexCount || fromVertex == toVertex) {
+        return false;
+    }
+
+    clearVisited();
+    clearPrevious();
+
+    //Creating queue
+    Queue<unsigned int> queue;
+
+    //Creating stack for Patch
+    Stack<unsigned int> path;
+
+    //Start search
+    if (!queue.enqueue(fromVertex)) {
+        return false;
+    }
+    
+    vertices[fromVertex].visited = true;
+
+    while (!queue.isEmpty()) {
+        unsigned int frontVertex = *queue.getFront();
+
+        if (frontVertex == toVertex) {
+            cout << "Path found from [" << fromVertex << "] to [" << toVertex << "]: ";
+
+            path.push(toVertex);
+            while (vertices[toVertex].previous != fromVertex) {
+                path.push(vertices[toVertex].previous);
+                toVertex = vertices[toVertex].previous;
+            }
+            path.push(fromVertex);
+
+            while (!path.isEmpty()) {
+                cout << *path.getTop() << " ";
+                path.pop();
+            }
+
+            cout << "\n";
+            return true;
+        }
+
+        queue.dequeue();
+
+        for (auto &edge : vertices[frontVertex].edges) {
+            if (!vertices[edge.target].visited) {
+                if (!queue.enqueue(edge.target)) {
+                    return false;
+                }
+    
+                vertices[edge.target].visited = true;
+                vertices[edge.target].previous = frontVertex;
+            }
+        }
+    }
+
+    cout << "No path found from [" << fromVertex << "] to [" << toVertex << "]\n";
+    return false;
+}
+
+
 void Graph::clearVisited() {
     for (unsigned int i = 0; i < vertexCount; ++i) {
         vertices[i].visited = false;
+    }
+}
+
+void Graph::clearPrevious() {
+    for (unsigned int i = 0; i < vertexCount; ++i) {
+        vertices[i].previous = UINT_MAX;
     }
 }
 
