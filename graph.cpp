@@ -58,10 +58,12 @@ bool Graph::insertEdge(unsigned int fromVertex, unsigned int toVertex) {
 
     // Creating an edge and inserting it
     Edge newEdge(toVertex);
-    if (!vertices[fromVertex].edges.insertAtEnd(newEdge)) {
+    Edge reverseEdge (fromVertex);
+
+    if (!vertices[fromVertex].edges.insertAtEnd(newEdge) || !vertices[toVertex].edges.insertAtEnd(reverseEdge)) {
         return false;
     }
-    
+
     return true;
 }
 
@@ -92,14 +94,36 @@ bool Graph::insertEdge(unsigned int fromVertex, unsigned int toVertex) {
     return true;
 }*/
 
-/*void Graph::deleteGraph() {
-    unsigned int i = 0;
-
-    for (auto it = vertices[i].edges.begin(); it != vertices[i].edges.end(); it++) {
-        vertices[i].edges.deleteList();
-        i++;
+void Graph::deleteGraph() {
+    // Validating if graph exists
+    if (!vertices) {
+        return;
     }
-}*/
+
+    // Deleting lists of edges
+    for (unsigned int i = 0; i < vertexCount; i++) {
+        vertices[i].edges.deleteList();
+    }
+
+    // Liberating array
+    delete [] vertices;
+    vertices = nullptr;
+    vertexCount = 0;
+}
+
+void Graph::printGraph() {
+    cout << "Graph" << endl;
+    
+    for (unsigned int i = 0; i < vertexCount; i++) {
+        cout << "[" << vertices[i].id << "]" << " -> ";
+
+        for (auto itEdges = vertices[i].edges.begin(); itEdges != vertices[i].edges.end(); itEdges++) {
+            cout << *itEdges << " ";
+        }
+
+        cout << endl;
+    }
+}
 
 bool Graph::isValidNumeric(const std::string& str) {
     // Check if string is empty
@@ -117,18 +141,3 @@ bool Graph::isValidNumeric(const std::string& str) {
     // String contains only digits, so it's a valid numeric string
     return true;
 }
-
-void Graph::printGraph() {
-    cout << "Graph" << endl;
-    
-    for (unsigned int i = 0; i < vertexCount; i++) {
-        cout << "[" << vertices[i].id << "]" << " -> ";
-
-        for (auto itEdges = vertices[i].edges.begin(); itEdges != vertices[i].edges.end(); itEdges++) {
-            cout << *itEdges << " ";
-        }
-
-        cout << endl;
-    }
-}
-

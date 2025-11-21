@@ -20,9 +20,9 @@ int main(int argc, char* argv[]) {
     std::cout << "Grafos" << std::endl;
 
     miGrafo.createGraph(3);
-    miGrafo.insertEdge(0, 2);
-    miGrafo.insertEdge(0, 2);
+    miGrafo.insertEdge(1, 2);
     miGrafo.insertEdge(0, 1);
+    miGrafo.insertEdge(0, 2);
     miGrafo.insertEdge(2, 1);
 
     miGrafo.printGraph();
