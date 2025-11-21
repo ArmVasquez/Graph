@@ -14,7 +14,7 @@ Graph::Graph() {
 
 Graph::~Graph() {
     // Destructor
-    //deleteGraph();
+    deleteGraph();
 }
 
 Graph::Edge::Edge(unsigned int toVertex) : target(toVertex) {}
@@ -90,6 +90,15 @@ bool Graph::insertEdge(unsigned int fromVertex, unsigned int toVertex) {
     }
     
     return true;
+}*/
+
+/*void Graph::deleteGraph() {
+    unsigned int i = 0;
+
+    for (auto it = vertices[i].edges.begin(); it != vertices[i].edges.end(); it++) {
+        vertices[i].edges.deleteList();
+        i++;
+    }
 }*/
 
 bool Graph::isValidNumeric(const std::string& str) {
