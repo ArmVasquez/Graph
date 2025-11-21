@@ -17,6 +17,7 @@ public:
 
     // Algorithms
     bool dfsIterative(unsigned int vertex);
+    bool bfs(unsigned int vertex);
 
     bool loadFromFile(std::string filename);
     //saveToFile(nombre)

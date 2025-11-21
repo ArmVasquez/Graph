@@ -1,7 +1,7 @@
 #include <iostream>
 #include <new>
-#include <string>
-#include <cctype>
+//#include <string>
+//#include <cctype>
 #include "graph.h"
 #include "Stack.h"
 
@@ -171,7 +171,7 @@ void Graph::clearVisited() {
 }
 
 
-bool Graph::isValidNumeric(const std::string& str) {
+/*bool Graph::isValidNumeric(const std::string& str) {
     // Check if string is empty
     if (str.empty()) {
         return false;
@@ -186,4 +186,4 @@ bool Graph::isValidNumeric(const std::string& str) {
     
     // String contains only digits, so it's a valid numeric string
     return true;
-}
+}*/
